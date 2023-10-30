@@ -20,21 +20,16 @@ def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Hello, I'm your AI assistant. How can I help you today?")
 
 def main():
-    # Create the bot instance
     bot = telegram.Bot(token="TvoyTgToken")
 
-    # Initialize the dispatcher
     dispatcher = bot.dispatcher
 
-    # Register the command handlers
     start_handler = CommandHandler("start", start)
     dispatcher.add_handler(start_handler)
 
-    # Register the message handler for generating responses
     message_handler = MessageHandler(Filters.text & ~Filters.command, generate_response)
     dispatcher.add_handler(message_handler)
 
-    # Start the bot
     bot.start_polling()
     bot.idle()
 
